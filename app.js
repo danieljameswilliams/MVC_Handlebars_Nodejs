@@ -3,17 +3,26 @@ var exphbs = require('express-handlebars');
 var path = require('path');
 
 var app = express();
+var viewsFolder = __dirname + '/public/views';
 
 app.use(express.static(__dirname + '/public'));
 
-var viewsFolder = __dirname + '/public/views'
+app.engine( 'handlebars', exphbs(
+{
+  defaultLayout: viewsFolder + '/layouts/master',
+  layoutsDir: viewsFolder + '/layouts',
+  partialsDir: viewsFolder + '/partials'
+}) );
+app.set('view engine', 'handlebars');
 app.set('views', viewsFolder);
 
-app.engine('handlebars', exphbs({defaultLayout: viewsFolder + '/layouts/master'}));
-app.set('view engine', 'handlebars');
-
 app.get('/', function (req, res) {
-  var mockObject = { firstName: 'Daniel', lastName: 'Williams' };
+  var mockObject = {
+    id: 0,
+    firstName: 'Daniel',
+    lastName: 'Jensen',
+    age: 22
+  };
   res.render('home', mockObject);
 });
 
