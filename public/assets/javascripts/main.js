@@ -1,5 +1,6 @@
 var homeDOM;
 var homeTemplate;
+var Person;
 
 $(document).ready(function() {
   _setupDOM();
@@ -25,7 +26,13 @@ function _fetchHomeTemplate() {
 
 function _onNameButtonClicked() {
   if( homeTemplate.length > 0) {
-    var mockObject = { firstName: 'Daniel', lastName: 'Rye Olesen' };
+
+    var mockObject = {
+      id: 0,
+      firstName: 'Daniel',
+      lastName: 'Williams',
+      age: 22
+    };
 
     var template   = Handlebars.compile( homeTemplate );
     var html       = template( mockObject );
